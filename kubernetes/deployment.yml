@@ -42,5 +42,6 @@ spec:
 - sudo kubectl get deployments
 - sudo kubectl get replicaset
 - sudo kubectl get pods
+- sudo kubectl set image deployment/myapp-deployment nginx-container=nginx:1.9.1
 
 
