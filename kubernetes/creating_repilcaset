@@ -26,5 +26,9 @@ spec:
 - sudo kubectl create -f replicaset.yml
 - sudo kubectl get repliaset
 - sudo kubectl get pods
+- sudo kubectl replace -f replicaset.yml --> if u want to increase the replicaset -> after replicas=6 use this command
+- sudo scale --replicas=6 -f replicaset.yml  --> manually increse
+        or 
+- sudo scale --replicas=6 replicaset myapp-replicaset
 
 
