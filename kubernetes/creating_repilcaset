@@ -1,0 +1,30 @@
+
+replicaset.yml
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replicaset
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: front-end
+  template:
+    metadata:
+      labels:
+        app: myapp
+        type: front-end
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx
+
+- sudo kubectl create -f replicaset.yml
+- sudo kubectl get repliaset
+- sudo kubectl get pods
+
+
