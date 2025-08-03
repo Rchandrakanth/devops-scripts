@@ -15,6 +15,7 @@ spec:
       type: front-end
   template:
     metadata:
+    name: myapp-pod
       labels:
         app: myapp
         type: front-end
