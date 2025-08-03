@@ -1,0 +1,46 @@
+
+What is a Deployment in Kubernetes?
+A Deployment is a Kubernetes resource that helps you manage a group of identical pods (your application instances). It defines the desired state for these pods — like how many replicas you want, which container image to run, and other settings.
+    
+    Why do we use Deployments?
+    Automated Pod Management: It makes sure the specified number of pods are always running.
+    
+    Easy Updates: You can update your app (like changing the container image) smoothly without downtime, thanks to rolling updates.
+    
+    Rollbacks: If an update causes problems, you can easily roll back to the previous version.
+    
+    Scaling: You can increase or decrease the number of pod replicas easily.
+    
+    Self-healing: If a pod crashes or is deleted, the Deployment automatically
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    app: myapp
+    type: frontend
+spec:
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+        type: front-end
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+  replicas: 3
+  selector:
+    matchLabels:
+      type: front-end
+
+- sudo kubectl create -f deployment.yml
+- sudo kubectl get deployments
+- sudo kubectl get replicaset
+- sudo kubectl get pods
+
+
