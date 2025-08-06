@@ -1,0 +1,107 @@
+
+===========voting-app-pod.yml=============
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: voting-app-pod
+  labels:
+    name: voting-app-pod
+    app: demo-voting-app
+spec:
+  containers:
+    - name: voting-app
+      image: chandu22727/examplevotingapp_vote:latest
+      ports:
+        - containerPort: 80
+      env:
+        - name: REDIS_HOST
+          value: redis
+
+
+      ========= result-app-pod.yml =======
+
+
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: result-app-pod
+        labels:
+          name: result-app-pod
+          app: demo-voting-app
+      spec:
+        containers:
+          - name: result-app
+            image: chandu22727/examplevotingapp_result:latest
+            ports:
+              - containerPort: 80
+            env:
+              - name: SERVER
+                value: db
+
+
+  ========== postgress-pod.yml ==============
+
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: postgres-pod
+      labels:
+        name: postgres-pod
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+
+===== == ===========  redis-pod.yml ===================
+    
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: redis-pod
+    labels:
+      name: redis-pod
+      app: demo-voting-app
+  spec:
+    containers:
+      - name: redis
+        image: redis
+        ports:
+          - containerPort: 6379
+
+  ================  cat worker-pod.yml ====================
+
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: worker-pod
+    labels:
+      name: worker-pod
+      app: demo-voting-app
+  spec:
+    containers:
+      - name: worker-pod
+        image: chandu22727/examplevotingapp_worker:latest
+        env:
+           - name: REDIS_HOST
+             value: "redis"
+           - name: SERVER
+             value: "db"
+           - name: POSTGRES_USER
+             value: "postgres"
+           - name: POSTGRES_PASSWORD
+             value: "postgres"
+
+
+
+
+      
+
