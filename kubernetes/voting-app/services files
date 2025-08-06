@@ -1,0 +1,88 @@
+
+
+  ===============================  voting-app-service.yml =====================
+
+
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: voting-service
+      labels:
+        name: voting-service
+        app: demo-voting-app
+    spec:
+      type: NodePort
+      ports:
+        - port: 80
+          targetPort: 80
+    #      targetPort: 80
+          nodePort: 30004
+      selector:
+        name: voting-app-pod
+        app: demo-voting-app
+
+
+    ===========   result-app-service.yml   ===============
+
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: result-service
+        labels:
+          name: result-service
+          app: demo-voting-app
+      spec:
+        type: NodePort
+        ports:
+          - port: 80
+            targetPort: 80
+            nodePort: 30005
+        selector:
+          name: result-app-pod
+          app: demo-voting-app
+
+
+    ==========   postgres-service.yml ================
+    
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: db
+        labels:
+          name: postgres-service
+          app: demo-voting-app
+      spec:
+        ports:
+          - port: 5432
+            targetPort: 5432
+        selector:
+          name: postgres-pod
+          app: demo-voting-app
+
+
+      =====  redis-service.yml ==========
+      
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: redis
+        labels:
+          name: redis-service
+          app: demo-voting-app
+      spec:
+        ports:
+          - port: 6379
+            targetPort: 6379
+        selector:
+          name: redis-pod
+          app: demo-voting-app
+
+
+    ===========
+
+
+          
+
+      
+      
+
